@@ -1,0 +1,234 @@
+colnames(bd)
+AXO
+CLUES
+SECTOR
+CLAVE INSTITUCIXN
+Clave Estado
+Nombre Estado
+Clave Municipio
+Nombre Municipio
+Clave Localidad
+Nombre Localidad
+Nombre de la Unidad
+Tipo de Establecimiento
+TipologXa
+NXmero de unidades
+XCuenta con agua potable?
+XCuenta con red municipal?
+XCuenta con pozo?
+XCuenta con cisterna?
+XCuenta con otra fuente?
+XCuenta con drenaje?
+XCuenta con planta de emergencia? (antes planta elXctrica)
+XCuenta con radio (banda civil)?
+XHay Internet en su unidad de salud?
+XCuenta con correo electrXnico (Internet)?
+XCuenta con red de voz?
+XCuenta con red de datos?
+XCuenta con sistema de telemedicina?
+XCuenta con expediente clXnico electrXnico?
+NXmero de BaXos PXblicos
+NXmero de BaXos para el personal
+NXmero de BaXos para pacientes
+NXmero de BaXos para discapacitados
+XCuenta con Xrea de HospitalizaciXn?
+XCuenta con Xrea de Unidad QuirXrgica?
+XCuenta con Unidad de Cuidados Intensivos?
+XCuenta con Xrea de Unidades de Cuidados Intensivos Neonatales?
+XCuenta con Unidad de Cuidados intermedios?
+XCuenta con Xrea Cuidados Coronarios?
+XCuenta con servicio de Medicina FXsica y RehabilitaciXn?
+XCuenta con Xrea de CirugXa Ambulatoria?
+XCuenta con Xrea de HemodiXlisis?
+XCuenta con Xrea de radioterapia (incluye teleterapia y braquiterapia)?
+XCuenta con Xrea de quimioterapia?
+XCuenta con Xrea de Unidad de Quemados?
+XCuenta con Xrea de Laboratorio ClXnico?
+XCuenta con Xrea de urgencias?
+XCuenta con Xrea de TocologXa y TococirugXa?
+XCuenta con Xrea de NeonatologXa y Cunero?
+XCuenta con Xrea de Banco de Sangre?
+NXmero de QuirXfanos
+NXmero de salas de expulsiXn
+NXmero de cunas para reciXn nacido sano (incluye las ubicadas en tocologXa como en neonatologXa y cuneros)
+NXmero de ambulancias
+TOTAL DE CONSULTORIOS
+NXmero de Consultorios de Medicina General / Familiar
+NXmero de Consultorios de EstomatologXa
+NXmero de Consultorios de PlanificaciXn Familiar
+NXmero de Consultorios de CirugXa Maxilo Facial
+NXmero de Consultorios de AlergologXa
+NXmero de Consultorios de AngiologXa
+NXmero de Consultorios de CardiologXa
+NXmero de Consultorios de CirugXa General y CirugXa
+NXmero de Consultorios de DermatologXa
+NXmero de Consultorios de EndocrinologXa
+NXmero de Consultorios de EpidemiologXa
+NXmero de Consultorios de GastroenterologXa
+NXmero de Consultorios de GeriatrXa
+NXmero de Consultorios de Gineco-Obstetricia
+NXmero de Consultorios de HematologXa
+NXmero de Consultorios de InfectologXa
+NXmero de Consultorios de Medicina de RehabilitaciXn
+NXmero de Consultorios de Medicina del Dolor
+NXmero de Consultorios de Medicina Interna
+NXmero de Consultorios de NefrologXa
+NXmero de Consultorios de NeumologXa
+NXmero de Consultorios de NeurologXa
+NXmero de Consultorios de NutriciXn
+NXmero de Consultorios de OftalmologXa
+NXmero de Consultorios de OncologXa
+NXmero de Consultorios de Ortopedia
+NXmero de Consultorios de OtorrinolaringologXa
+NXmero de Consultorios de PediatrXa
+NXmero de Consultorios de ProctologXa
+NXmero de Consultorios de PsicologXa
+NXmero de Consultorios de PsiquiatrXa
+NXmero de Consultorios de ReumatologXa
+NXmero de Consultorios de UrologXa
+NXmero de Consultorios de TraumatologXa
+NXmero de consultorios en Xrea de urgencias
+NXmero de consultorios de valoraciXn
+NXmero de Consultorios de Otras Especialidades
+TOTAL CAMAS AREA HOSPITALIZACIXN
+NXmero de camas de aislados
+NXmero de camas de Medicina general
+NXmero de camas de AngiologXa
+NXmero de camas de CardiologXa
+NXmero de camas de CirugXa General y CirugXa Reconstructiva
+NXmero de camas de GastroenterologXa
+NXmero de camas de GeriatrXa
+NXmero de camas de Gineco-Obstetricia
+NXmero de camas de HematologXa
+NXmero de camas de InfectologXa
+NXmero de camas de Medicina Interna
+NXmero de camas de NefrologXa
+NXmero de camas de NeumologXa
+NXmero de camas de NeurologXa
+NXmero de camas de OftalmologXa
+NXmero de camas de OncologXa
+NXmero de camas de Ortopedia
+NXmero de camas de OtorrinolaringologXa
+NXmero de camas de PediatrXa
+NXmero de camas de ProctologXa
+NXmero de camas de PsiquiatrXa
+NXmero de camas de ReumatologXa
+NXmero de camas de UrologXa
+NXmero de camas de TraumatologXa
+NXmero de camas de otras especialidades en Xrea de hospitalizaciXn
+TOTAL CAMAS EN OTRAS AREAS (NO CONSIDERA HOSPITALIZACIXN)
+NXmero de camas en recuperaciXn postquirXrgica
+NXmero de camas en la Unidad de Cuidados Intensivos (incluye pediXtricas y adulto)
+NXmero de camas en la Unidad de Cuidados Intermedios (incluye pediXtricas y adulto)
+NXmero de camas en cuidados coronarios
+NXmero de camas de recuperaciXn en cirugXa ambulatoria
+NXmero de camas en Xrea de radioterapia (incluye teleterapia y braquiterapia)
+"NXmero de camas en quimioterapia, aplicaciXn hospitalizada"
+NXmero de camas de quemados
+NXmero de camas en la unidad de transplante de mXdula Xsea
+NXmero de camas en Xrea de Urgencias
+NXmero de camas de observaciXn en Xrea de curaciones
+NXmero de camas en Xrea de labor de parto
+NXmero de camas en Xrea de recuperaciXn postparto
+NXmero de camas  en otras Xreas (no considerando Xrea de hospitalizaciXn)
+NXmero de Aceleradores lineales
+NXmero de Cunas de calor radiante
+NXmero de Incubadoras
+NXmero de MastXgrafos (analXgico y digital)
+NXmero de Equipos de resonancia magnXtica
+NXmero de TomXgrafos computados
+NXmero de Unidades de hemodiXlisis (incluye con Xsmosis inversa y pediXtrica)
+Total mXdicos generales y especialistas
+NXmero de MXdicos Generales
+NXmero de MXdicos Familiares
+NXmero de Pediatras
+NXmero de Ginecoobstetras
+NXmero de MXdicos Cirujanos
+NXmero de MXdicos Internistas
+NXmero de MXdicos OftalmXlogos
+NXmero de MXdicos OtorrinonaringXlogos
+NXmero de MXdicos TraumatXlogos
+NXmero de MXdicos DermatXlogos
+NXmero de MXdicos AnestesiXlogos
+NXmero de MXdicos Psiquiatras
+NXmero de OdontXlogos
+NXmero de OdontXlogos especialistas (incluye cirujano)
+NXmero de MXdicos EndrocrinXlogos
+NXmero de MXdicos GastroenterXlogos
+NXmero de MXdicos CardiXlogos
+NXmero de MXdicos en RehabilitaciXn (medicina fXsica)
+NXmero de MXdicos UrXlogos
+NXmero de MXdicos Cirujanos plXsticos y reconstructivos
+NXmero deMXdicos NeumXlogos
+NXmero de MXdicos NeurXlogos
+NXmero de MXdicos OncXlogos
+NXmero de MXdicos HematXlogos
+NXmero de MXdicos UrgenciXlogos
+NXmero de MXdicos Ortopedistas
+NXmero de MXdicos ProctXlogos
+NXmero de MXdicos AngiXlogos (vascular perifXrico)
+NXmero de MXdicos NefrXlogos
+NXmero de MXdicos ReumatXlogos
+NXmero de MXdicos InfectXlogos
+NXmero de MXdicos Geriatras
+NXmero de MXdicos Genetistas
+NXmero de MXdicos AlergXlogos
+NXmero de MXdicos RadiXlogos
+NXmero de MXdicos Otras especialidades
+Total mXdicos en formaciXn
+NXmero de Pasantes de medicina
+NXmero de Pasante de odontologXa
+NXmero de Interno de pregrado
+NXmero de MXdicos Residentes
+Total medicos en otras labores
+NXmero de MXdicos en labores administrativas
+NXmero de MXdicos en labores de enseXanza e investigaciXn
+NXmero de MXdicos EpidemiXlogos
+NXmero de MXdicos Anatomo-patXlogos
+NXmero de MXdicos Otras actividades
+Total enfermeras en contacto con el paciente
+NXmero de Personal de EnfermerXa General
+NXmero de Personal de EnfermerXa Especialista
+NXmero de Personal de EnfermerXa Pasante
+NXmero de Personal de EnfermerXa Auxiliar
+Total enfermeras en otras labores
+NXmero Personal de EnfermerXa en labores administrativas
+NXmero de Personal de EnfermerXa en labores de enseXanza e investigaciXn
+NXmero de Personal de EnfermerXa en otras actividades
+Total personal profesional
+NXmero de QuXmicos
+NXmero de Lic. en Trabajo Social
+NXmero de BiXlogos
+NXmero de FarmacobiXlogos
+NXmero de NutriXlogos
+NXmero de PsicXlogos
+NXmero de Ing. BiomXdicos
+NXmero de Otro personal profesional
+Total personal tXcnico
+NXmero de Personal TXcnico en OdontologXa
+NXmero de Personal TXcnico en Trabajo Social
+NXmero de Personal TXcnico ElectromXdico (electrocardiografXa y electroencefalografXa)
+NXmero de Personal TXcnico en Laboratorio
+NXmero de Personal TXcnico en EstadXstica
+"NXmero de Perosnal TXcnico en AtenciXn Primaria (TAP s, PRODIAP s)"
+NXmero de Personal TXcnico en RehabilitaciXn FXsica
+NXmero de Personal TXcnico en AnestesiologXa
+NXmero de Personal TXcnico en RadiologXa
+NXmero de Personal TXcnico Dietista (incluye nutricionistas)
+NXmero de Personal TXcnico Promotores de Salud
+NXmero de Personal TXcnico en HistopatologXa
+NXmero Personal TXcnico en CitotecnologXa
+NXmero Personal TXcnico en Banco de Sangre
+NXmero de Personal TXcnico en inhaloterapia
+NXmero de Partera
+NXmero de Otro personal tXcnico
+Total otro personal
+NXmero de Personal administrativo
+NXmero de Personal en archivo clXnico
+NXmero de Personal en conservaciXn y mantenimiento
+NXmero de Personal de Intendencia (incluye lavanderXa)
+NXmero de Otro personal
+Ultrasonido
+LITOTRIPTORES
+ElectrocardiXgrafos
+ElectroencefalXgrafos
