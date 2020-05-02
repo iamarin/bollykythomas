@@ -11,7 +11,7 @@ library(readr)
 
 # PATH
 
-# Datos
+# Datos de SSA
 bd <- read_csv(paste0(bases,'Recursos_Salud_2018.csv'))
 
 # Guardo los nombres de las columnas me estreso sin datos curados
@@ -51,11 +51,12 @@ sum(bd[120], na.rm = T)
 bd_uci <- tbl_df(bd[bd$V35==1,])
 
 # Proporcion de camas uci por tipo de institucion
-(bd_uci %>%
+bd_uci %>%
   group_by(V4) %>% 
     #select("V4","V120") %>% 
   summarise(n = sum(V120,na.rm = T)) %>% 
-  mutate(freq = n/sum(n)*100))
+  mutate(freq = n/sum(n)*100) %>%
+  ggplot(aes(x= reorder(V4, -freq),y=freq)) + geom_col()
 
 # Proporcion de camas uci por entidad federativa
 View(bd_uci_camas <- bd_uci %>%
@@ -70,7 +71,8 @@ bd_uci_camas %>%
   summarise(prom=mean(n,na.rm = T),
             min = min(n,na.rm = T),
             max = max(n,na.rm= T),
-            ds = sd(n,na.rm = T))
+            ds = sd(n,na.rm = T)) 
+
 
 # Nayarit el estado con menos camas de cuidados intensivos
 bd_uci_camas[which.min(bd_uci_camas$freq),]
@@ -80,11 +82,16 @@ bd_ah <- tbl_df(bd[bd$V33==1,])
 
 # Proporcion de camas AH por entidad federativa por mil habitantes
 View(bd_ah_camas <- bd_ah %>%
-  group_by(V6,V5) %>% 
+  group_by(V6) %>% 
   select(V6,V92) %>% 
   summarise(n = sum(V92,na.rm = T)) %>% 
   mutate(freq = n/sum(n)*100) %>% 
   arrange(-freq))
+
+ggplot(bd_ah_camas,aes(y = n)) + geom_boxplot()
+
+bd_ah_camas <- merge(x = bd_ah_camas, y = unique(bd[,c('V6','V5')]), by = "V6", all.x=TRUE)
+bd_ah_camas <- tbl_df(bd_ah_camas)
 
 # Nombre de columnas
 colnames(bd_ah_camas) 
@@ -107,6 +114,8 @@ pmao2 <- pmao %>%
 
 # merge
 bd_ah_camas <- left_join(bd_ah_camas,pmao2,by="CVE_GEO")
+bd_ah_camas <- bd_ah_camas %>% 
+  select(-ENTIDAD)
 
 # Creamos la proporcion
 bd_ah_camas$pmil <- bd_ah_camas$n/bd_ah_camas$pobmil
@@ -115,9 +124,14 @@ bd_ah_camas$pmil <- bd_ah_camas$n/bd_ah_camas$pobmil
 bd_ah_camas %>% 
   arrange(-n)
 
+ggplot(bd_ah_camas,aes(x = reorder(V6, -n), y = n)) + geom_col() +  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
 # Notar sonora
-bd_ah_camas %>% 
+bd_ah_camas2 <- bd_ah_camas %>% 
   arrange(-pmil)
+
+ggplot(bd_ah_camas2,aes(x = reorder(V6, -pmil), y = pmil)) + geom_col() + geom_col() +  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
 
 # Numero de medicos generales y especialistas
 sum(bd[140], na.rm = T)==sum(bd[141:176], na.rm = T)
@@ -142,31 +156,60 @@ bd %>%
     otresp = sum(V143,V144,V145,V147,V148,V149,V150,V152,V153,V154,V155,V156,V157,V158,V159,V160,V162,V163,V164,V166,V167,V168,V169,V170,V172,V173,V174,V175,V176),
     pespcrit = espcrit/sum(espcrit+otresp)*100,
     potroesp = (100-pespcrit)
-  )
+)
+
 
 # Medicos por entidad federativa
-bd %>% 
+medent <- bd %>% 
   group_by(V6) %>% 
   select(V6,V140:V176) %>% 
   summarise(
     medicos = sum(V140,na.rm = T)
   ) %>% 
-  arrange(-medicos) %>% 
-  mutate(
-    mmil=medicos/1000
-  )
+  arrange(-medicos)
 
-#
+medent <- merge(x =medent , y = unique(bd[,c('V6','V5')]), by = "V6", all.x=TRUE)
+medent <- tbl_df(medent)
+
+# Lo cambiamos por comodidad al merge
+names(medent)[names(medent) == 'V5'] <- 'CVE_GEO'
+
+# merge
+medent <- left_join(medent,pmao2,by="CVE_GEO")
+medent <- medent %>% 
+  select(-ENTIDAD)
+
+# Medicos por cada mil habitantes
+medent %>% 
+  mutate(
+    mmil=medicos/pobmil
+)
+
+# Medicos criticos por entidad federativa
 bd %>% 
+  select(V6,V146,V161,V165,V151,V171,V140) %>% 
+  group_by(V6) %>% 
+  #select(V6,V140:V176) %>% 
+  summarise(
+    total = sum(V140),
+    medicos = sum(V146,V161,V165,V151,V171,na.rm = T),
+    internista = sum(V146),
+    neumolo = sum(V161),
+    urgen = sum(V165),
+    anes = sum(V151),
+    infec = sum(V171)
+  ) %>% 
+  arrange(-medicos) 
+
+# Base medicos
+bdmed <- bd %>% 
   group_by(V6) %>% 
   select(V6,V140:V176) %>% 
-  summarise(
-    medicos = sum(V140,na.rm = T)
-  ) %>% 
-  arrange(-medicos) %>% 
-  mutate(
-    mmil=medicos/1000
-  ) %>% 
-  summarise(
-    prom = mean(mmil,na.rm = T)
-  )
+  summarise_all(funs(sum))
+
+# Graficos
+bdmed %>% 
+  arrange(-V140) -> bdexp 
+  
+ggplot(bdexp,aes(x=V6, y=V140)) + geom_col()
+  
