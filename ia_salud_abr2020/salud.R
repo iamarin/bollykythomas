@@ -8,6 +8,8 @@ library(dplyr)
 library(ggplot2)
 library(broom)
 library(readr)
+library(janitor)
+library(tidyr)
 
 # PATH
 
@@ -25,7 +27,8 @@ glimpse(bd)
 # Claves estados
 bd %>% 
   select(V5) %>% 
-  unique()
+  unique() %>% 
+  as.list()
 
 # Poblacion
 pob <- read_csv(paste0(bases,'ind_dem_proyecciones.csv'))
@@ -36,13 +39,20 @@ glimpse(pob)
   filter(AO == 2018 & ENTIDAD != 'Repblica Mexicana') %>% 
   arrange(-POB_MIT_AO) %>% 
     select(ENTIDAD,CVE_GEO,POB_MIT_AO) %>% 
-    unique()) 
+    unique() %>% 
+    clean_names()) 
 
 # Tipo de establecimiento por entidad federativa
 bd %>% 
+  select(V6,V12) %>% 
   mutate(contador = 1) %>% 
   group_by(V6, V12) %>% 
-  summarise(unidades = sum(contador, na.rm = T))
+  summarise(unidades = sum(contador, na.rm = T)) %>% 
+  clean_names() %>% 
+  spread(v12,unidades) %>% 
+  replace(is.na(.), 0) %>% 
+  mutate(
+    colsum=100* `HOSPITALIZACIXN`/(`CONSULTA EXTERNA` + `DE APOYO`+ `DE ASISTENCIA SOCIAL`+`HOSPITALIZACIXN`))
 
 # Numero de camas de cuidados intensivos
 sum(bd[120], na.rm = T)
@@ -55,11 +65,18 @@ bd_uci %>%
   group_by(V4) %>% 
     #select("V4","V120") %>% 
   summarise(n = sum(V120,na.rm = T)) %>% 
-  mutate(freq = n/sum(n)*100) %>%
-  ggplot(aes(x= reorder(V4, -freq),y=freq)) + geom_col()
+  mutate(freq = n/sum(n)) %>%
+  ggplot() + geom_col(aes(x= reorder(V4, -freq),y=freq)) +
+  labs(
+    x = 'Afiliación',
+    y = 'Porcentaje de camas de cuidados intensivos',
+    title = 'Camas de cuidados intensivos por afiliación',
+    caption = "Fuente: Elaborado por @elvagodeldato con información de Secretaría de Salud"
+    
+  ) + scale_y_continuous(labels = scales::percent)
 
 # Proporcion de camas uci por entidad federativa
-View(bd_uci_camas <- bd_uci %>%
+(bd_uci_camas <- bd_uci %>%
     group_by(V6) %>% 
     #select(V6,V120) %>% 
     summarise(n = sum(V120,na.rm = T)) %>% 
@@ -124,13 +141,13 @@ bd_ah_camas$pmil <- bd_ah_camas$n/bd_ah_camas$pobmil
 bd_ah_camas %>% 
   arrange(-n)
 
-ggplot(bd_ah_camas,aes(x = reorder(V6, -n), y = n)) + geom_col() +  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(bd_ah_camas,aes(x = reorder(V6, -n), y = n)) + geom_col() +  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + coord_flip()
 
 # Notar sonora
 bd_ah_camas2 <- bd_ah_camas %>% 
   arrange(-pmil)
 
-ggplot(bd_ah_camas2,aes(x = reorder(V6, -pmil), y = pmil)) + geom_col() + geom_col() +  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggplot(bd_ah_camas2,aes(x = reorder(V6, -pmil), y = pmil)) + geom_col() +  theme(axis.text.x = element_text(angle = 90, hjust = 1))  + coord_flip()
 
 
 # Numero de medicos generales y especialistas
@@ -192,14 +209,14 @@ bd %>%
   #select(V6,V140:V176) %>% 
   summarise(
     total = sum(V140),
-    medicos = sum(V146,V161,V165,V151,V171,na.rm = T),
+    medicosc = sum(V146,V161,V165,V151,V171,na.rm = T),
     internista = sum(V146),
     neumolo = sum(V161),
     urgen = sum(V165),
     anes = sum(V151),
     infec = sum(V171)
   ) %>% 
-  arrange(-medicos) 
+  arrange(-medicosc) 
 
 # Base medicos
 bdmed <- bd %>% 
@@ -207,9 +224,13 @@ bdmed <- bd %>%
   select(V6,V140:V176) %>% 
   summarise_all(funs(sum))
 
+#bdmed %>% 
+#  select(V6,V140) %>% 
+#  gather(key = 'esp', value = 'medicos', V140)
+
+
 # Graficos
-bdmed %>% 
-  arrange(-V140) -> bdexp 
-  
-ggplot(bdexp,aes(x=V6, y=V140)) + geom_col()
-  
+
+
+glimpse(bd)
+
