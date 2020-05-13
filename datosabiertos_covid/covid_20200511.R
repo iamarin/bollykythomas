@@ -11,11 +11,12 @@ library(readr)
 library(janitor)
 library(tidyr)
 library(readxl)
+library(fdth)
 
 # PATH
 
 # load data
-(covid <- read_csv(paste0(bases,'200510COVID19MEXICO.csv')))
+(covid <- read_csv(paste0(bases,'200511COVID19MEXICO.csv')))
 
 # en bonito
 covid <- covid %>% 
@@ -99,5 +100,52 @@ for(col in dic_cols){
   covid[,col] <- sapply(covid[,col], function(code){codes[paste(col, '.', code, sep = '')]})
 }
 
-View(covid)
+#View(covid)
+glimpse(covid)
+
+# bdd_confirmados
+confirmados <- covid %>% 
+  filter(resultado=='Positivo SARS-CoV-2')
+
+# 36327 confirmados
+dim(confirmados) 
+
+# tipo de paciente
+table(confirmados$tipo_paciente)
+
+# histograma de edad sobre sexo
+ggplot(confirmados,aes(x = edad, fill=sexo )) + 
+  geom_histogram(alpha=0.6,binwidth=5,position = 'identity') +   
+  scale_fill_manual(values = c("#20B2AA", "#D8BFD8"))+
+  labs(
+  x = 'Edad',
+  y = 'Casos',
+  title = 'Rangos de edad y sexo',
+  caption = "Fuente: Elaborado por @elvagodeldato con información de Secretaría de Salud") +
+  theme(plot.caption = element_text(color = "gray30"))
+
+# histograma de edad sobre tipo_paciente
+ggplot(confirmados,aes(x = edad, fill=tipo_paciente )) + 
+  geom_histogram(alpha=0.6,binwidth=5,position = 'identity') +   
+  scale_fill_manual(values = c("#20B2AA", "#D8BFD8"))+
+  labs(
+    x = 'Edad',
+    y = 'Casos',
+    title = 'Rangos de edad y tipo de paciente',
+    caption = "Fuente: Elaborado por @elvagodeldato con información de Secretaría de Salud") +
+  theme(plot.caption = element_text(color = "gray30"))
+
+# en afan de emular el tablero con otros graficos anadi el siguiente
+ggplot(confirmados,aes(y = resultado, x = tipo_paciente   )) + 
+  geom_col(width = 0.2) +   
+  #scale_fill_manual(values = c("#20B2AA", "#D8BFD8"))+
+  labs(
+    x = 'Tipo de paciente',
+    y = 'Casos',
+    title = 'Casos por tipo de paciente',
+    caption = "Fuente: Elaborado por @elvagodeldato con información de Secretaría de Salud") +
+  theme(plot.caption = element_text(color = "gray30"),
+        axis.text.y = element_text(angle = 90,hjust = 0))
+
+
 
