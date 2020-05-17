@@ -12,3 +12,6 @@ marriage <- factor(affairs$ratemarr,
 # Prop table
 prop.table(table(marriage))
 
+for(i in 1:length(df)){
+	print(i)
+}
