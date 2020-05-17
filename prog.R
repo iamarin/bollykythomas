@@ -16,4 +16,4 @@ for(i in 1:length(df)){
 	print(i)
 }
 
-print(i+as.character(k)
+print(i
